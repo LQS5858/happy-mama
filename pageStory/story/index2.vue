@@ -5,7 +5,8 @@
       <towxml :nodes="contentFormat" />
     </view>
     <view class="pos-fix icon-fix-wrapper">
-      <view class="pos-rel">
+      <view class="pos-rel"
+            v-if="process.env.OPEN_SHARE">
         <button open-type="share"
                 class="share-btn pos-as" />
         <u-icon size="120rpx"
@@ -13,6 +14,7 @@
       </view>
 
       <view @tap="audioHandler"
+            v-if="storySuccess"
             class="iconfont icon-a-10-01 audio-icon "></view>
     </view>
   </view>
@@ -34,6 +36,7 @@ export default {
       userRoleId: '',
       userKeywordId: '',
       loading: false,
+      storySuccess: false,
       content: '',
       eventSource: null,
       options: {},
@@ -107,6 +110,7 @@ export default {
             uni.hideLoading()
           }
           if (+data?.code == 10) {
+            this.storySuccess = true
             this.userKeywordId = data?.userKeywordId
             this.saveStore()
             this.textToSpeech()
