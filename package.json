@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.21",
-    "microsoft-cognitiveservices-speech-sdk": "^1.26.0",
     "moment": "^2.29.4",
     "vuex-persistedstate": "^4.1.0"
   },

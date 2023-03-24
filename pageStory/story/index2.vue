@@ -4,8 +4,17 @@
     <view class="content-text">
       <towxml :nodes="contentFormat" />
     </view>
-    <view @tap="audioHandler"
-          class="iconfont icon-a-10-01 audio-icon pos-fix"></view>
+    <view class="pos-fix icon-fix-wrapper">
+      <view class="pos-rel">
+        <button open-type="share"
+                class="share-btn pos-as" />
+        <u-icon size="120rpx"
+                name="share-square"></u-icon>
+      </view>
+
+      <view @tap="audioHandler"
+            class="iconfont icon-a-10-01 audio-icon "></view>
+    </view>
   </view>
 </template>
 <script>
@@ -157,6 +166,18 @@ export default {
 <style  lang='scss'>
 .story-wrapper {
   background: $bg-color;
+  .share-btn {
+    opacity: 0;
+    right: 0;
+    left: 0;
+    z-index: 23;
+    top: 0;
+    bottom: 0;
+  }
+  .icon-fix-wrapper {
+    right: 0;
+    bottom: 80rpx;
+  }
   /deep/.h2w {
     min-height: 100vh;
     border-radius: 20rpx;
@@ -171,8 +192,6 @@ export default {
   }
   .audio-icon {
     font-size: 100rpx;
-    right: 0;
-    bottom: 80rpx;
   }
 }
 </style>
