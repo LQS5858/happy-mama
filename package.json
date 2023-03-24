@@ -1,0 +1,52 @@
+{
+  "name": "happy-mama",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "microsoft-cognitiveservices-speech-sdk": "^1.26.0",
+    "moment": "^2.29.4",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "uni-app": {
+    "scripts": {
+      "test": {
+        "title": "测试版",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "api_base_url": "https://happymama.vip",
+          "IMAGE_URL": "https://happymama.vip/images/",
+          "EVENT_SOURCE_URL": "https://happymama.vip/api/generateStoryStream",
+          "SOCKET_URL": "wss://happymama.vip/websocket"
+        }
+      },
+      "uat": {
+        "title": "预发布",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "api_base_url": "https://happymama.vip",
+          "IMAGE_URL": "https://happymama.vip/images/",
+          "EVENT_SOURCE_URL": "https://happymama.vip/api/generateStoryStream",
+          "SOCKET_URL": "wss://happymama.vip/websocket"
+        }
+      },
+      "prod": {
+        "title": "生产",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "api_base_url": "https://happymama.vip",
+          "IMAGE_URL": "https://happymama.vip/images/",
+          "EVENT_SOURCE_URL": "https://happymama.vip/api/generateStoryStream",
+          "SOCKET_URL": "wss://happymama.vip/websocket"
+        }
+      }
+    }
+  }
+}

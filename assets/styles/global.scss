@@ -1,0 +1,43 @@
+.bg-color {
+  background-color: #b7ebf0;
+}
+
+.pos-as {
+  position: absolute;
+}
+.pos-rel {
+  position: relative;
+}
+.pos-fix {
+  position: fixed;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-column {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.text-center {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.success-btn-wrapper {
+  .u-button--success {
+    margin-top: 120rpx;
+  }
+  .u-icon__icon {
+    color: #fff !important;
+  }
+}
+
+.u-button {
+  background-color: $primary-bg-color !important;
+  border: none !important;
+}
