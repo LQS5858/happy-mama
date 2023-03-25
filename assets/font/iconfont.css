@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3965147 */
   /* Color fonts */
-  src: url("@/assets/font/iconfont.woff2?t=1679320294345") format("woff2"),
-    url("@/assets/font/iconfont.woff?t=1679320294345") format("woff"),
-    url("@/assets/font/iconfont.ttf?t=1679320294345") format("truetype");
+  src: url("@/assets/font/iconfont.woff2?t=1679716112691") format("woff2"),
+    url("@/assets/font/iconfont.woff?t=1679716112691") format("woff"),
+    url("@/assets/font/iconfont.ttf?t=1679716112691") format("truetype");
 }
 
 .iconfont {
@@ -12,6 +12,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fanhui:before {
+  content: "\e615";
+}
+
+.icon-JC_054:before {
+  content: "\e660";
 }
 
 .icon-a-10-01:before {

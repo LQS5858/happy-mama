@@ -4,17 +4,19 @@
     <view class="content-text">
       <towxml :nodes="contentFormat" />
     </view>
-    <view class="pos-fix icon-fix-wrapper">
-      <view class="pos-rel"
-            v-if="process.env.OPEN_SHARE">
-        <button open-type="share"
-                class="share-btn pos-as" />
-        <u-icon size="120rpx"
-                name="share-square"></u-icon>
+    <view v-if="storySuccess"
+          class="pos-fix icon-fix-wrapper">
+      <view @tap="backHandler"
+            class="iconfont share-icon icon-fanhui"></view>
+      <view class="pos-rel">
+        <!-- <button open-type="share"
+                class="share-btn pos-as" /> -->
+        <!-- <view class="iconfont icon-JC_054 share-icon"></view> -->
+        <!-- <u-icon size="120rpx"
+                name="share-square"></u-icon> -->
       </view>
 
       <view @tap="audioHandler"
-            v-if="storySuccess"
             class="iconfont icon-a-10-01 audio-icon "></view>
     </view>
   </view>
@@ -62,6 +64,9 @@ export default {
   },
   onShow() {},
   methods: {
+    async backHandler() {
+      uni.navigateBack()
+    },
     async gengerStory() {
       try {
         const body = {
@@ -170,6 +175,9 @@ export default {
 <style  lang='scss'>
 .story-wrapper {
   background: $bg-color;
+  .share-icon {
+    font-size: 120rpx;
+  }
   .share-btn {
     opacity: 0;
     right: 0;

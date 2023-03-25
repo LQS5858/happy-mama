@@ -121,7 +121,7 @@ export default {
     height: 350rpx;
   }
   /deep/.u-button--success {
-    margin-top: 120rpx;
+    margin-top: 300rpx;
     width: 90% !important;
   }
   .content-wrapper {

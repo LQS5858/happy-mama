@@ -25,7 +25,7 @@
                 icon="checkbox-mark"
                 iconColor="#fe6e63">下一步</u-button>
       <text type="info"
-            v-if="curStep!==0"
+            v-if="curStep!==0&&(!userRoles||(userRoles&&userRoles.length<3))"
             class="text-center back-text"
             @tap="backHandler">返回</text>
 
