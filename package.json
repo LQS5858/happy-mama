@@ -44,7 +44,7 @@
           "IMAGE_URL": "https://happymama.vip/images/",
           "EVENT_SOURCE_URL": "https://happymama.vip/api/generateStoryStream",
           "SOCKET_URL": "wss://happymama.vip/websocket",
-          "OPEN_SHARE": false
+          "OPEN_SHARE": true
         }
       }
     }

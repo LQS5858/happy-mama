@@ -93,7 +93,9 @@ export default {
       try {
         loginInstance
           .getRoleInfo()
-          .finally(() => uni.stopPullDownRefresh())
+          .finally(() => {
+            uni.stopPullDownRefresh()
+          })
           .catch()
       } catch (error) {
         console.log(error)

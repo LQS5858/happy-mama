@@ -2,32 +2,38 @@
   <view class="story-wrapper">
 
     <view class="content-text">
-      <towxml :nodes="contentFormat" />
+      <towxml v-if="content"
+              :nodes="contentFormat" />
+      <u-empty v-else>
+      </u-empty>
     </view>
-    <view v-if="storySuccess"
-          class="pos-fix icon-fix-wrapper">
+
+    <view class="pos-fix icon-fix-wrapper">
       <view @tap="backHandler"
             class="iconfont share-icon icon-fanhui"></view>
-      <view class="pos-rel">
-        <!-- <button open-type="share"
-                class="share-btn pos-as" /> -->
-        <!-- <view class="iconfont icon-JC_054 share-icon"></view> -->
-        <!-- <u-icon size="120rpx"
-                name="share-square"></u-icon> -->
+      <view class="pos-rel"
+            v-if="process.env.OPEN_SHARE">
+        <button open-type="share"
+                class="share-btn pos-as" />
+        <view class="iconfont icon-JC_054 share-icon"></view>
+        <u-icon size="120rpx"
+                name="share-square"></u-icon>
       </view>
 
       <view @tap="audioHandler"
+            v-if="audioUrl"
             class="iconfont icon-a-10-01 audio-icon "></view>
     </view>
   </view>
 </template>
 <script>
 import towxml from '@/static/towxml/towxml'
-
+import { getAudio } from '@/apiServices/story'
 import { saveStore, genterStory } from '@/apiServices/story'
 import { StreamSource } from '@/utils/eventSource'
 import { mapGetters } from 'vuex'
 import { audioLength, generateStoreTimeOut } from '@/config'
+const innerAudioContext = uni.createInnerAudioContext()
 export default {
   name: 'story',
   data() {
@@ -42,6 +48,7 @@ export default {
       content: '',
       eventSource: null,
       options: {},
+      audioStatus: false,
     }
   },
   components: {
@@ -59,11 +66,28 @@ export default {
   onLoad(options) {
     console.log('options~~', options)
     this.options = options
-    // this.gengerStory()
-    this.websocketStory()
+    this.gengerStory()
+  },
+  onPullDownRefresh() {
+    let id = setTimeout(() => {
+      this.gengerStory()
+      id = clearTimeout(id)
+    })
   },
   onShow() {},
   methods: {
+    async getAudio() {
+      try {
+        if (!this.userKeywordId) return
+        const params = {
+          userKeywordId: this.userKeywordId,
+        }
+        const [res] = (await getAudio(params).catch()) || []
+        this.audioUrl = res?.filePath || ''
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async backHandler() {
       uni.navigateBack()
     },
@@ -77,13 +101,21 @@ export default {
           title: '亲,故事正在生成中～～',
           icon: 'none',
         })
-        const [res] = await genterStory(body)
-          .catch()
-          .finally(() => uni.hideLoading())
-        this.content = res || ''
-        this.saveStore()
-        this.textToSpeech()
+        const [res, err] =
+          (await genterStory(body)
+            .catch()
+            .finally(() => {
+              uni.hideLoading()
+              uni.stopPullDownRefresh()
+            })) || []
+        console.log('story res~~', res)
+        if (err && !res) return
+        this.content = res?.content || ''
+        this.userKeywordId = res?.userKeywordId || ''
+        this.storySuccess = true
+        this.getAudio()
       } catch (error) {
+        this.storySuccess = false
         console.log(error)
       }
     },
@@ -138,10 +170,25 @@ export default {
       }
     },
     async audioHandler() {
-      if (!this.audioUrl) return
-      let innerAudioContext = uni.createInnerAudioContext()
+      if (!this.audioUrl) {
+        uni.showToast({
+          title: '亲,没有任何音频文件～～',
+          duration: 2000,
+          icon: 'none',
+        })
+        return
+      }
       innerAudioContext.src = this.audioUrl
+      console.log('播放状态～～', innerAudioContext?.paused)
+      if (this.audioStatus) {
+        innerAudioContext.pause()
+        this.audioStatus = false
+        return
+      }
       innerAudioContext.play()
+      innerAudioContext.onPlay(() => {
+        this.audioStatus = true
+      })
     },
     formatContent() {
       let data = this.content.replace(/\s/gi, '')
@@ -175,6 +222,9 @@ export default {
 <style  lang='scss'>
 .story-wrapper {
   background: $bg-color;
+  /deep/.u-empty {
+    height: 100vh;
+  }
   .share-icon {
     font-size: 120rpx;
   }
