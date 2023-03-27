@@ -20,7 +20,7 @@
                    borderBottom
                    ref="item1">
         <u--input placeholder="输入年龄"
-                  type="text"
+                  type="number"
                   border="none"
                   @input="()=>inputHandler('age')"
                   v-model.trim="formData.age"></u--input>

@@ -1,5 +1,5 @@
 <template>
-  <view class="step-wrapper bg-color">
+  <view class="step-wrapper  bg-color">
     <u-steps :current="curStep"
              activeColor="#ff9900"
              inactiveColor="#c8c9cc">
@@ -180,6 +180,9 @@ export default {
   height: 100vh;
   box-sizing: border-box;
   padding: 0 80rpx;
+  /deep/ .one-step-wrapper {
+    padding: 0 50rpx !important;
+  }
   /deep/ .u-avatar__image--square {
     width: 100% !important;
     height: 100% !important;

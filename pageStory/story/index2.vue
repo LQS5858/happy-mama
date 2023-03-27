@@ -12,12 +12,11 @@
       <view @tap="backHandler"
             class="iconfont share-icon icon-fanhui"></view>
       <view class="pos-rel"
-            v-if="process.env.OPEN_SHARE">
+            v-if="openShare">
         <button open-type="share"
                 class="share-btn pos-as" />
         <view class="iconfont icon-JC_054 share-icon"></view>
-        <u-icon size="120rpx"
-                name="share-square"></u-icon>
+
       </view>
 
       <view @tap="audioHandler"
@@ -58,6 +57,9 @@ export default {
     ...mapGetters({
       token: 'basic/token',
     }),
+    openShare() {
+      return process.env.OPEN_SHARE
+    },
     contentFormat() {
       if (!this.content) return
       return this.towxmlFunc(this.content, 'markdown')
@@ -226,7 +228,7 @@ export default {
     height: 100vh;
   }
   .share-icon {
-    font-size: 120rpx;
+    font-size: 100rpx;
   }
   .share-btn {
     opacity: 0;
@@ -237,7 +239,7 @@ export default {
     bottom: 0;
   }
   .icon-fix-wrapper {
-    right: 0;
+    right: 20rpx;
     bottom: 80rpx;
   }
   /deep/.h2w {

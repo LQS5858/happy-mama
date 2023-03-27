@@ -1,18 +1,24 @@
 <template>
-  <view class="step-wrapper bg-color">
+  <view class="step-wrapper one-step-wrapper bg-color">
     <text class="text-center title">让我们为您的故事选一个主角开始</text>
     <view class="flex-row avatar-wrapper">
-      <view class="avatar-icon flex-row"
-            :class="String(curActive)==='0'?'avatar-active':''"
-            @tap="()=>changeActive(0)">
-        <u-avatar :src="avatarRight"
-                  shape="square"></u-avatar>
+      <view>
+        <view class="avatar-icon flex-row"
+              :class="String(curActive)==='0'?'avatar-active':''"
+              @tap="()=>changeActive(0)">
+          <u-avatar :src="avatarRight"
+                    shape="square"></u-avatar>
+        </view>
+        <view class="gender-text">女孩</view>
       </view>
-      <view class="avatar-icon flex-row"
-            :class="String(curActive)==='1'?'avatar-active':''"
-            @tap="()=>changeActive(1)">
-        <u-avatar :src="avatarLeft"
-                  shape="square"></u-avatar>
+      <view>
+        <view class="avatar-icon flex-row"
+              :class="String(curActive)==='1'?'avatar-active':''"
+              @tap="()=>changeActive(1)">
+          <u-avatar :src="avatarLeft"
+                    shape="square"></u-avatar>
+        </view>
+        <view class="gender-text">男孩</view>
       </view>
     </view>
   </view>
@@ -57,6 +63,10 @@ export default {
 .step-wrapper {
   box-sizing: border-box;
   padding: 0 80rpx;
+  .gender-text {
+    margin-top: 30rpx;
+    text-align: center;
+  }
   .title {
     margin: 68rpx 0 50rpx;
   }
