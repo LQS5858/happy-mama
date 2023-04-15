@@ -16,22 +16,7 @@
 	"subPackages": [
 		{
 			"root": "pageStory",
-			"pages": [
-				{
-					"path": "story/index2",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": true
-					}
-				},
-				{
-					"path": "step/index",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": true
-					}
-				}
-			]
+			"pages": []
 		}
 	],
 	"uniIdRouter": {}
